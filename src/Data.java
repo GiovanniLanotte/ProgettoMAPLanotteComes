@@ -46,8 +46,8 @@ class Data {
 		attributeSet[3]= new DiscreteAttribute("wind", 3, windValue);
 		//Avvaloro gli attributi di playTennis
 		String playTennisValue[]= new String[2];
-		playTennisValue[0]= "yes";
-		playTennisValue[1]= "no";
+		playTennisValue[0]= "no";
+		playTennisValue[1]= "yes";
 		attributeSet[4]= new DiscreteAttribute("playTennis", 4, playTennisValue);
 
 		//data
@@ -59,85 +59,85 @@ class Data {
 		data[0][1]=temperatureValue[0];
 		data[0][2]=humidityValue[0];
 		data[0][3]=windValue[0];
-		data[0][4]=playTennisValue[1];
+		data[0][4]=playTennisValue[0];
 		
 		data[1][0]=outLookValues[2];
 		data[1][1]=temperatureValue[0];
 		data[1][2]=humidityValue[0];
 		data[1][3]=windValue[1];
-		data[1][4]=playTennisValue[1];
+		data[1][4]=playTennisValue[0];
 
 		data[2][0]=outLookValues[0];
 		data[2][1]=temperatureValue[0];
 		data[2][2]=humidityValue[0];
 		data[2][3]=windValue[0];
-		data[2][4]=playTennisValue[0];
+		data[2][4]=playTennisValue[1];
 
 		data[3][0]=outLookValues[1];
 		data[3][1]=temperatureValue[1];
 		data[3][2]=humidityValue[0];
 		data[3][3]=windValue[0];
-		data[3][4]=playTennisValue[0];
+		data[3][4]=playTennisValue[1];
 
 		data[4][0]=outLookValues[1];
 		data[4][1]=temperatureValue[2];
 		data[4][2]=humidityValue[1];
 		data[4][3]=windValue[0];
-		data[4][4]=playTennisValue[0];
+		data[4][4]=playTennisValue[1];
 
 		data[5][0]=outLookValues[1];
 		data[5][1]=temperatureValue[2];
 		data[5][2]=humidityValue[1];
 		data[5][3]=windValue[1];
-		data[5][4]=playTennisValue[1];
+		data[5][4]=playTennisValue[0];
 
 		data[6][0]=outLookValues[0];
 		data[6][1]=temperatureValue[2];
 		data[6][2]=humidityValue[1];
 		data[6][3]=windValue[1];
-		data[6][4]=playTennisValue[0];
+		data[6][4]=playTennisValue[1];
 
 		data[7][0]=outLookValues[2];
 		data[7][1]=temperatureValue[1];
 		data[7][2]=humidityValue[0];
 		data[7][3]=windValue[0];
-		data[7][4]=playTennisValue[1];
+		data[7][4]=playTennisValue[0];
 
 		data[8][0]=outLookValues[2];
 		data[8][1]=temperatureValue[2];
 		data[8][2]=humidityValue[1];
 		data[8][3]=windValue[0];
-		data[8][4]=playTennisValue[0];
+		data[8][4]=playTennisValue[1];
 
 		data[9][0]=outLookValues[1];
 		data[9][1]=temperatureValue[1];
 		data[9][2]=humidityValue[1];
 		data[9][3]=windValue[0];
-		data[9][4]=playTennisValue[0];
+		data[9][4]=playTennisValue[1];
 
 		data[10][0]=outLookValues[2];
 		data[10][1]=temperatureValue[1];
 		data[10][2]=humidityValue[1];
 		data[10][3]=windValue[1];
-		data[10][4]=playTennisValue[0];
+		data[10][4]=playTennisValue[1];
 
 		data[11][0]=outLookValues[0];
 		data[11][1]=temperatureValue[1];
 		data[11][2]=humidityValue[0];
 		data[11][3]=windValue[1];
-		data[11][4]=playTennisValue[0];
+		data[11][4]=playTennisValue[1];
 
 		data[12][0]=outLookValues[0];
 		data[12][1]=temperatureValue[0];
 		data[12][2]=humidityValue[1];
 		data[12][3]=windValue[0];
-		data[12][4]=playTennisValue[0];
+		data[12][4]=playTennisValue[1];
 
 		data[13][0]=outLookValues[1];
 		data[13][1]=temperatureValue[1];
 		data[13][2]=humidityValue[0];
 		data[13][3]=windValue[1];
-		data[13][4]=playTennisValue[1];
+		data[13][4]=playTennisValue[0];
 
 	
 		
@@ -182,8 +182,6 @@ class Data {
 	public static void main(String args[]){
 		Data trainingSet=new Data();
 		System.out.println(trainingSet);
-		
-		
 	}
 
 }
