@@ -12,15 +12,15 @@ public Attribute(String name, int index){
 	this.index=index;
 }
 
-public String getName(){
-	return name;
+public String getName(){ //metodo che restituisce il valore del membro name
+	return name; //nome dell'attributo
 }
 
-public int getIndex(){
-	return index;
+public int getIndex(){ //metodo che restituisce il valore del membro index
+	return index;  //identificativo numerico dell'attributo
 }
 
-public String toString(){
+public String toString(){ //metodo che restituisce il valore del membro name
 	return name;
 }
 }

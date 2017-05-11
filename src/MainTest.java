@@ -3,7 +3,7 @@ public class MainTest {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+		public static void main(String[] args) {
 		Data data= new Data();
 		
 		LinkList outputFP=FrequentPatternMiner.frequentPatternDiscovery(data,(float)0.2);

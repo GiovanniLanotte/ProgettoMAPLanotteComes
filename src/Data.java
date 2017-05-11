@@ -1,11 +1,16 @@
 
 // TO DO : DECIDERE LE VISIBILITà DI ATTRIBUTI, METODI, CLASSI
+/*Definiamo la classe Data per modellare un insieme di transizioni
+ * (vettori attributo-valore)*/
 class Data {
 	
 	private Object data [][]; // una matrice di Object che ha numero di righe pari al numero di transazioni da memorizzare e numero di colonne pari al numero di attributi in ciascuna transazione
 	private int numberOfExamples;//cardinalità dell’insieme di transazioni
 	private Attribute attributeSet[];// un array di attributi, che sono avvalorati in ciascuna transazione
 	
+	/*La classe Data popola la matrice data[][] con le transizioni (14 transazioni per 5 attributi)
+	 * Inoltre avvalora l'array attributeSet[] con cinque oggetti di DiscreteAttribute
+	 * uno per ciascun attributo*/
 	
 	Data(){
 
@@ -139,30 +144,33 @@ class Data {
 		data[13][3]=windValue[1];
 		data[13][4]=playTennisValue[0];
 
-	
-		
 		
 	}
 	
-	int getNumberOfExamples(){
-		return numberOfExamples;
+	int getNumberOfExamples(){ //metodo che  restituisce il valore del membro  numberOfExamples 
+		 
+		 return numberOfExamples; //cardinalità dell'insieme delle transazioni
 	}
 	
-	int getNumberOfAttributes(){
-		return attributeSet.length;
+	int getNumberOfAttributes(){ //metodo che restituisce la cardinalità del membro  attributeSet 
+		 
+		 return attributeSet.length;  //cardinalità dell'nsieme degli attributi
 	}
-	
-	
 	
 	Object getAttributeValue(int exampleIndex, int attributeIndex){
-		return data[exampleIndex][attributeIndex];
+		//metodo che  restituisce il valore dell' attributo attributeIndex  per la transazione exampleIndex meomorizzata in data 
+		// assume come  indice di riga per la matrice data che corrisponde ad una specifica transazione, indice di colonna per un attributo
+		return data[exampleIndex][attributeIndex];  // valore assunto dall’attributo identificato da attributeIndex nella transazione identificata da exampleIndex nel membro data. 
 	}
 	
-	Attribute getAttribute(int index){
-		return attributeSet[index];
+	Attribute getAttribute(int index){  //metodo che restituisce l’attributo in posizione attributeIndex di attributeSet 
+		return attributeSet[index];  //attributo con indice attributeIndex
 	}
 	
-	
+	/*il metodo to String per ogni transazione memorizzata in data, concatena i valori assunti dagli attributi nella transazione 
+	 * separati da virgole in una stringa. Le stringhe che rappresentano ogni transazione sono poi concatenate in un’unica stringa da 
+	 *restituire in output. 
+  */
 	public String toString(){
 		String stringa=new String();
 		for(int i=0;i<data.length;i++){
@@ -170,9 +178,9 @@ class Data {
 			for(int k=0;k<data[k].length;k++){
 				stringa=stringa+data[i][k]+",";
 			}
-		stringa=stringa+"\n";
+		stringa=stringa+"\n"; //concatenamento di stringhe
 		}
-		return stringa;
+		return stringa; //un unica stringa contente le stringhe concatenate
 		
 		
 	}
