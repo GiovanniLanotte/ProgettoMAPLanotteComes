@@ -2,10 +2,11 @@ package mining;
 import data.Attribute;
 import data.Data;
 import data.DiscreteAttribute;
+import data.EmptySetException;
 import utility.*;
 public class FrequentPatternMiner {
 
-	public static LinkList frequentPatternDiscovery(Data data, float minSup)  {
+	public static LinkList frequentPatternDiscovery(Data data, float minSup) throws EmptySetException {
 		Queue fpQueue = new Queue();
 		LinkList outputFP = new LinkList();
 		for (int i = 0; i < data.getNumberOfAttributes(); i++) {
@@ -30,7 +31,9 @@ public class FrequentPatternMiner {
 		} catch (EmptyQueueException e) {
 			System.err.println(e.getMessage());
 		}
-		
+		if (outputFP.isEmpty()){ //solleva l'eccezione se l'outputFP è vuoto
+			throw new EmptySetException();
+		}
 		return outputFP;
 	}
 
