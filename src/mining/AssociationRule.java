@@ -1,4 +1,4 @@
-
+package mining;
 public class AssociationRule {
 private Item antecedent[]=new Item[0];
 private Item consequent[]=new Item[0];
