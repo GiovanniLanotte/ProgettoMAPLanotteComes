@@ -1,5 +1,6 @@
+package mining;
 import data.Data;
-
+import utility.LinkList;
 public class AssociationRuleMiner {
 		
 	
