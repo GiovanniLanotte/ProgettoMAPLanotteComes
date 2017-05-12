@@ -1,7 +1,7 @@
 package mining;
 
 public class OneLevelPatternException extends Exception {
-	public OneLevelPatternException() {
-		super("Errore il pattern è di lunghezza 1");
+	public OneLevelPatternException(String pattern) {
+		super("La lunghezza di "+pattern+" è 1");
 	}
 }

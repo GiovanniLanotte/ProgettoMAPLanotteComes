@@ -33,7 +33,7 @@ public class LinkList {
 			if (isEmpty())
 				throw new IndexOutOfBoundsException("Lista vuota");
 			if (p == firstList())
-				return inizioLista.link;
+				return inizioLista.link.getElemento();
 			else
 				return ((Puntatore) p).link.successivo.link.getElemento();
 			
@@ -72,3 +72,4 @@ public class LinkList {
 
 	
 }
+

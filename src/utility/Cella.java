@@ -9,7 +9,7 @@ public class Cella {
 		public Cella(Object e){
 			elemento = e;
 		}
-
+		//aggiunta
 		public Object getElemento(){
 			return elemento;
 		}

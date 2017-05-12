@@ -8,7 +8,7 @@ public class AssociationRuleMiner {
 //		TO DO
 		LinkList outputAR=new LinkList();
 		if(fp.getPatternLength()==1)
-			throw new OneLevelPatternException();
+			throw new OneLevelPatternException(fp.toString());
 		for(int i=1;i<fp.getPatternLength();i++){
 			AssociationRule ar= confidentAssociationRuleDiscovery(data, fp, minConf, i);
 			if(ar.getConfidence()>minConf){
