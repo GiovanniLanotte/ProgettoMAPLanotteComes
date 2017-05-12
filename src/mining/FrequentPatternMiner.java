@@ -5,7 +5,7 @@ import data.DiscreteAttribute;
 import utility.*;
 public class FrequentPatternMiner {
 
-	static LinkList frequentPatternDiscovery(Data data, float minSup) {
+	public static LinkList frequentPatternDiscovery(Data data, float minSup) {
 		Queue fpQueue = new Queue();
 		LinkList outputFP = new LinkList();
 		for (int i = 0; i < data.getNumberOfAttributes(); i++) {
