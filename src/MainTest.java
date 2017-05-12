@@ -1,10 +1,12 @@
 import data.Data;
-
+import utility.LinkList;
+import mining.FrequentPatternMiner;
 public class MainTest {
 
 	/**
 	 * @param args
 	 */
+	
 		public static void main(String[] args) {
 		Data data= new Data();
 		
