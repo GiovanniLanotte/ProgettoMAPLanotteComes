@@ -13,7 +13,7 @@ public class Data {
 	 * Inoltre avvalora l'array attributeSet[] con cinque oggetti di DiscreteAttribute
 	 * uno per ciascun attributo*/
 	
-	Data(){
+	public Data(){
 
 		// numberOfExamples
 		
