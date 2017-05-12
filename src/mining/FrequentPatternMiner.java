@@ -6,7 +6,7 @@ import data.EmptySetException;
 import utility.*;
 public class FrequentPatternMiner {
 
-	public static LinkList frequentPatternDiscovery(Data data, float minSup) throws EmptySetException {
+	public static LinkList frequentPatternDiscovery(Data data, float minSup) {
 		Queue fpQueue = new Queue();
 		LinkList outputFP = new LinkList();
 		for (int i = 0; i < data.getNumberOfAttributes(); i++) {
@@ -26,18 +26,11 @@ public class FrequentPatternMiner {
 			}
 
 		}
-		try{
 		outputFP = expandFrequentPatterns(data, minSup, fpQueue, outputFP);
-		} catch (EmptyQueueException e) {
-			System.err.println(e.getMessage());
-		}
-		if (outputFP.isEmpty()){ //solleva l'eccezione se l'outputFP è vuoto
-			throw new EmptySetException();
-		}
 		return outputFP;
 	}
 
-	private static LinkList expandFrequentPatterns(Data data, float minSup, Queue fpQueue, LinkList outputFP) throws EmptyQueueException  {
+	private static LinkList expandFrequentPatterns(Data data, float minSup, Queue fpQueue, LinkList outputFP) {
 		// TO DO
 		//in outputFP ci sono i pattern di lunghezza 1 frequenti
 		//1) crearsi un array in cui copia i riferimenti agli item 
@@ -68,6 +61,10 @@ public class FrequentPatternMiner {
 			for(int i=0;i<itemPerRaffinamento.length;i++){
 				boolean elemItemUguali=false;
 				for(int k=0;k<fp.getPatternLength();k++){
+						String NameItem=fp.getItem(k).getAttribute().getName();
+						String ValueItem=(String)fp.getItem(k).getValue();
+						String NameitemPerRaffinamento=itemPerRaffinamento[i].getAttribute().getName();
+						String ValueitemPerRaffinamento=(String)itemPerRaffinamento[i].getValue();
 						if(itemPerRaffinamento[i].getAttribute().getName().equals((String)fp.getItem(k).getAttribute().getName())&&
 						itemPerRaffinamento[i].getValue().equals((String)fp.getItem(k).getValue())){
 							elemItemUguali=true;
@@ -123,7 +120,7 @@ public class FrequentPatternMiner {
 	// aggiunta
 	private static boolean controlloEsistenza(LinkList list, FrequentPattern fp) {
 		for (Puntatore p = list.firstList(); !list.endList(p); p = list.succ(p)) {
-			FrequentPattern controlloFp = (FrequentPattern) p.link.getElemento();
+			FrequentPattern controlloFp = (FrequentPattern) p.link.elemento;
 			if (controlloFp.getPatternLength() == fp.getPatternLength()) {
 				int controllo = 0;
 				for (int i = 0; i < controlloFp.getPatternLength(); i++) {

@@ -33,9 +33,9 @@ public class LinkList {
 			if (isEmpty())
 				throw new IndexOutOfBoundsException("Lista vuota");
 			if (p == firstList())
-				return inizioLista.link.getElemento();
+				return inizioLista.link.elemento;
 			else
-				return ((Puntatore) p).link.successivo.link.getElemento();
+				return ((Puntatore) p).link.successivo.link.elemento;
 			
 				
 

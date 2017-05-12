@@ -1,9 +1,11 @@
 import data.Data;
+import data.EmptySetException;
 import utility.LinkList;
 import mining.AssociationRule;
 import mining.AssociationRuleMiner;
 import mining.FrequentPattern;
 import mining.FrequentPatternMiner;
+import mining.OneLevelPatternException;
 import utility.Puntatore;
 public class MainTest {
 
@@ -14,7 +16,9 @@ public class MainTest {
 		public static void main(String[] args) {
 		Data data= new Data();
 		
-		LinkList outputFP=FrequentPatternMiner.frequentPatternDiscovery(data,(float)0.2);
+		LinkList outputFP;
+			outputFP = FrequentPatternMiner.frequentPatternDiscovery(data,(float)0.2);
+		
 		
 		int i=1;
 		Puntatore p=outputFP.firstList();
@@ -33,7 +37,6 @@ public class MainTest {
 			p=outputFP.succ(p);
 			i++;
 		}
-		
 		
 	}
 

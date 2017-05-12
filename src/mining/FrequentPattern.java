@@ -5,25 +5,28 @@ import java.util.List;
 
 public class FrequentPattern implements Cloneable{
 
-	private List<Item> fp;
+	private Item fp[];
 	private float support;
 	
 	FrequentPattern(){ 
-			fp=new LinkedList<Item>();
+			fp=new Item[0];
 	}
 	
 	//aggiunge un nuovo item al pattern
 	public void addItem(Item item)
 	{
-		int length =fp.size();
+		int length =fp.length;
 		
-		fp.add(item);
+		Item temp []=new Item[length+1];
+		System.arraycopy(fp, 0, temp, 0, length);
+		temp [length]=item;
+		fp=temp;
 		
 		
 	}
 	
 	public Item getItem(int index){
-		return fp.get(index);
+		return fp[index];
 	}
 	
 	public float getSupport(){
@@ -31,7 +34,7 @@ public class FrequentPattern implements Cloneable{
 	}
 	
 	public int getPatternLength(){
-		return fp.size();
+		return fp.length;
 	}
 	
 	public void setSupport(float support){
@@ -40,10 +43,10 @@ public class FrequentPattern implements Cloneable{
 	
 	public String toString(){
 		String value="";
-		for(int i=0;i<fp.size()-1;i++)
-			value+=fp.get(i) +" AND ";
-		if(fp.size()>0){
-			value+=fp.get(fp.size()-1);
+		for(int i=0;i<fp.length-1;i++)
+			value+=fp[i] +" AND ";
+		if(fp.length>0){
+			value+=fp[fp.length-1];
 			value+="["+support+"]";
 		}
 		

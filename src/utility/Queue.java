@@ -3,65 +3,63 @@ package utility;
  * pattern frequenti scoperti a livello k da usare per generare i pattern candidati a livello k+1*/
 public class Queue implements Cloneable {
 
-		private Record begin = null;
+	private Record begin = null;
 
-		private Record end = null;
-		
-		private class Record {
+	private Record end = null;
+	
+	private class Record {
 
-	 		public Object elem;
+ 		public Object elem;
 
-	 		public Record next;
+ 		public Record next;
 
-			public Record(Object e) {
-				this.elem = e; 
-				this.next = null;
-			}
+		public Record(Object e) {
+			this.elem = e; 
+			this.next = null;
 		}
-		
-
-		public boolean isEmpty() {
-			return this.begin == null;
-		}
-
-		public void enqueue(Object e) {
-			if (this.isEmpty())
-				this.begin = this.end = new Record(e);
-			else {
-				this.end.next = new Record(e);
-				this.end = this.end.next;
-			}
-		}
-
-
-		public Object first() throws EmptyQueueException{
-			if(this.isEmpty())
-				throw new EmptyQueueException();
-			return this.begin.elem;
-		}
-
-		public void dequeue() throws EmptyQueueException{
-			if(this.begin==this.end){
-				if(this.begin==null)
-					throw new EmptyQueueException();
-				else
-					this.begin=this.end=null;
-			}
-			else{
-				begin=begin.next;
-			}
-			
-		}
-		
-		public Object clone(){
-			Object o = null;
-			try {
-				o= super.clone();
-			} catch (CloneNotSupportedException e) {
-			
-				System.err.println("La clonazione non è avvenuta correttamente");
-			}
-			return o;
-		}
-
 	}
+	
+
+	public boolean isEmpty() {
+		return this.begin == null;
+	}
+
+	public void enqueue(Object e) {
+		if (this.isEmpty())
+			this.begin = this.end = new Record(e);
+		else {
+			this.end.next = new Record(e);
+			this.end = this.end.next;
+		}
+	}
+
+
+	public Object first(){
+		return this.begin.elem;
+	}
+
+	public void dequeue(){
+		if(this.begin==this.end){
+			if(this.begin==null)
+			System.out.println("The queue is empty!");
+			else
+				this.begin=this.end=null;
+		}
+		else{
+			begin=begin.next;
+		}
+		
+	}
+	
+	public Object clone(){
+		Object o = null;
+		try {
+			o= super.clone();
+		} catch (CloneNotSupportedException e) {
+		
+			System.err.println("La clonazione non è avvenuta correttamente");
+		}
+		return o;
+	}
+
+}

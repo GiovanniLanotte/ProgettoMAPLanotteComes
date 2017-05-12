@@ -2,13 +2,11 @@ package mining;
 import data.Data;
 import utility.LinkList;
 public class AssociationRuleMiner {
-		
 	
-	public static LinkList confidentAssociationRuleDiscovery(Data data,FrequentPattern fp,float minConf) throws OneLevelPatternException	{
+	
+	public static LinkList confidentAssociationRuleDiscovery(Data data,FrequentPattern fp,float minConf)	{
 //		TO DO
 		LinkList outputAR=new LinkList();
-		if(fp.getPatternLength()==1)
-			throw new OneLevelPatternException(fp.toString());
 		for(int i=1;i<fp.getPatternLength();i++){
 			AssociationRule ar= confidentAssociationRuleDiscovery(data, fp, minConf, i);
 			if(ar.getConfidence()>minConf){
