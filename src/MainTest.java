@@ -1,6 +1,9 @@
 import data.Data;
 import utility.LinkList;
+import mining.AssociationRuleMiner;
+import mining.FrequentPattern;
 import mining.FrequentPatternMiner;
+import utility.Puntatore;
 public class MainTest {
 
 	/**
