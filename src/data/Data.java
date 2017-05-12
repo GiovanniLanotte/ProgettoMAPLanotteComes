@@ -3,7 +3,7 @@ package data;
 // TO DO : DECIDERE LE VISIBILITà DI ATTRIBUTI, METODI, CLASSI
 /*Definiamo la classe Data per modellare un insieme di transizioni
  * (vettori attributo-valore)*/
-class Data {
+public class Data {
 	
 	private Object data [][]; // una matrice di Object che ha numero di righe pari al numero di transazioni da memorizzare e numero di colonne pari al numero di attributi in ciascuna transazione
 	private int numberOfExamples;//cardinalità dell’insieme di transazioni
