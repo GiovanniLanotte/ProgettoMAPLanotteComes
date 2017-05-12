@@ -17,6 +17,7 @@ public class MainTest {
 		Data data= new Data();
 		
 		LinkList outputFP;
+		try {
 			outputFP = FrequentPatternMiner.frequentPatternDiscovery(data,(float)0.2);
 		
 		
@@ -36,6 +37,14 @@ public class MainTest {
 			}
 			p=outputFP.succ(p);
 			i++;
+		}
+		
+		} catch (EmptySetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (OneLevelPatternException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 	}

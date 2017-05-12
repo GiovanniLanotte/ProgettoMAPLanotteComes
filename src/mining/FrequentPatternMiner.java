@@ -6,7 +6,7 @@ import data.EmptySetException;
 import utility.*;
 public class FrequentPatternMiner {
 
-	public static LinkList frequentPatternDiscovery(Data data, float minSup) {
+	public static LinkList frequentPatternDiscovery(Data data, float minSup) throws EmptySetException{
 		Queue fpQueue = new Queue();
 		LinkList outputFP = new LinkList();
 		for (int i = 0; i < data.getNumberOfAttributes(); i++) {
@@ -26,11 +26,18 @@ public class FrequentPatternMiner {
 			}
 
 		}
+		try{
 		outputFP = expandFrequentPatterns(data, minSup, fpQueue, outputFP);
+		}catch (EmptyQueueException e) {
+			System.err.println(e.getMessage());
+		}
+		if (outputFP.isEmpty()){ //solleva l'eccezione se l'outputFP è vuoto
+			throw new EmptySetException();
+		}
 		return outputFP;
 	}
 
-	private static LinkList expandFrequentPatterns(Data data, float minSup, Queue fpQueue, LinkList outputFP) {
+	private static LinkList expandFrequentPatterns(Data data, float minSup, Queue fpQueue, LinkList outputFP) throws EmptySetException,EmptyQueueException{
 		// TO DO
 		//in outputFP ci sono i pattern di lunghezza 1 frequenti
 		//1) crearsi un array in cui copia i riferimenti agli item 

@@ -34,14 +34,17 @@ public class Queue implements Cloneable {
 	}
 
 
-	public Object first(){
+	public Object first() throws EmptyQueueException{
+		if(this.isEmpty()){
+			throw new EmptyQueueException();
+		}
 		return this.begin.elem;
 	}
 
-	public void dequeue(){
+	public void dequeue() throws EmptyQueueException{
 		if(this.begin==this.end){
 			if(this.begin==null)
-			System.out.println("The queue is empty!");
+				throw new EmptyQueueException();
 			else
 				this.begin=this.end=null;
 		}
