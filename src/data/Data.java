@@ -148,23 +148,23 @@ public class Data {
 		
 	}
 	
-	int getNumberOfExamples(){ //metodo che  restituisce il valore del membro  numberOfExamples 
+	public int getNumberOfExamples(){ //metodo che  restituisce il valore del membro  numberOfExamples 
 		 
 		 return numberOfExamples; //cardinalità dell'insieme delle transazioni
 	}
 	
-	int getNumberOfAttributes(){ //metodo che restituisce la cardinalità del membro  attributeSet 
+	public int getNumberOfAttributes(){ //metodo che restituisce la cardinalità del membro  attributeSet 
 		 
 		 return attributeSet.length;  //cardinalità dell'nsieme degli attributi
 	}
 	
-	Object getAttributeValue(int exampleIndex, int attributeIndex){
+	public Object getAttributeValue(int exampleIndex, int attributeIndex){
 		//metodo che  restituisce il valore dell' attributo attributeIndex  per la transazione exampleIndex meomorizzata in data 
 		// assume come  indice di riga per la matrice data che corrisponde ad una specifica transazione, indice di colonna per un attributo
 		return data[exampleIndex][attributeIndex];  // valore assunto dall’attributo identificato da attributeIndex nella transazione identificata da exampleIndex nel membro data. 
 	}
 	
-	Attribute getAttribute(int index){  //metodo che restituisce l’attributo in posizione attributeIndex di attributeSet 
+	public Attribute getAttribute(int index){  //metodo che restituisce l’attributo in posizione attributeIndex di attributeSet 
 		return attributeSet[index];  //attributo con indice attributeIndex
 	}
 	
