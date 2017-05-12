@@ -1,3 +1,4 @@
+package mining;
 public class FrequentPattern implements Cloneable{
 
 	private Item fp[];
