@@ -1,8 +1,8 @@
 /* Definiamo la classe Cella che modella un elemento singolo della struttura dati lista linkata*/
 package utility;
-class Cella {
+public class Cella {
 		
-		Object elemento;
+		private Object elemento;
 		
 		Puntatore successivo=null; 
 
@@ -10,4 +10,7 @@ class Cella {
 			elemento = e;
 		}
 
+		public Object getElemento(){
+			return elemento;
+		}
 	}
