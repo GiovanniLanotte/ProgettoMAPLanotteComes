@@ -5,7 +5,7 @@ import data.DiscreteAttribute;
 import utility.*;
 public class FrequentPatternMiner {
 
-	public static LinkList frequentPatternDiscovery(Data data, float minSup) {
+	public static LinkList frequentPatternDiscovery(Data data, float minSup)  {
 		Queue fpQueue = new Queue();
 		LinkList outputFP = new LinkList();
 		for (int i = 0; i < data.getNumberOfAttributes(); i++) {
@@ -25,11 +25,16 @@ public class FrequentPatternMiner {
 			}
 
 		}
+		try{
 		outputFP = expandFrequentPatterns(data, minSup, fpQueue, outputFP);
+		} catch (EmptyQueueException e) {
+			System.err.println(e.getMessage());
+		}
+		
 		return outputFP;
 	}
 
-	private static LinkList expandFrequentPatterns(Data data, float minSup, Queue fpQueue, LinkList outputFP) {
+	private static LinkList expandFrequentPatterns(Data data, float minSup, Queue fpQueue, LinkList outputFP) throws EmptyQueueException  {
 		// TO DO
 		//in outputFP ci sono i pattern di lunghezza 1 frequenti
 		//1) crearsi un array in cui copia i riferimenti agli item 
@@ -60,10 +65,6 @@ public class FrequentPatternMiner {
 			for(int i=0;i<itemPerRaffinamento.length;i++){
 				boolean elemItemUguali=false;
 				for(int k=0;k<fp.getPatternLength();k++){
-						String NameItem=fp.getItem(k).getAttribute().getName();
-						String ValueItem=(String)fp.getItem(k).getValue();
-						String NameitemPerRaffinamento=itemPerRaffinamento[i].getAttribute().getName();
-						String ValueitemPerRaffinamento=(String)itemPerRaffinamento[i].getValue();
 						if(itemPerRaffinamento[i].getAttribute().getName().equals((String)fp.getItem(k).getAttribute().getName())&&
 						itemPerRaffinamento[i].getValue().equals((String)fp.getItem(k).getValue())){
 							elemItemUguali=true;
