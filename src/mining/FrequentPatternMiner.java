@@ -1,7 +1,8 @@
+package mining;
 import data.Attribute;
 import data.Data;
 import data.DiscreteAttribute;
-
+import utility.*;
 public class FrequentPatternMiner {
 
 	static LinkList frequentPatternDiscovery(Data data, float minSup) {
@@ -118,7 +119,7 @@ public class FrequentPatternMiner {
 	// aggiunta
 	private static boolean controlloEsistenza(LinkList list, FrequentPattern fp) {
 		for (Puntatore p = list.firstList(); !list.endList(p); p = list.succ(p)) {
-			FrequentPattern controlloFp = (FrequentPattern) p.link.elemento;
+			FrequentPattern controlloFp = (FrequentPattern) p.link.getElemento();
 			if (controlloFp.getPatternLength() == fp.getPatternLength()) {
 				int controllo = 0;
 				for (int i = 0; i < controlloFp.getPatternLength(); i++) {
