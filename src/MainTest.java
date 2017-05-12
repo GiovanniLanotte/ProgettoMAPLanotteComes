@@ -1,5 +1,6 @@
 import data.Data;
 import utility.LinkList;
+import mining.AssociationRule;
 import mining.AssociationRuleMiner;
 import mining.FrequentPattern;
 import mining.FrequentPatternMiner;
