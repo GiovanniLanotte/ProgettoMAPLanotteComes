@@ -1,4 +1,5 @@
-
+/*Definiamo la classe Queue che modella una struttura coda che è poi  usata come contenitore a modalità FIFO per i 
+ * pattern frequenti scoperti a livello k da usare per generare i pattern candidati a livello k+1*/
 class Queue implements Cloneable {
 
 		private Record begin = null;

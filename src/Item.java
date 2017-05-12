@@ -1,7 +1,8 @@
-
+/*Definiamo la classe astratta Item che modella un generico item (coppia attributo-valore, per esempio Outlook=”Sunny”) 
+*/
 public abstract class Item {
-private Attribute attribute;
-private Object value;
+private Attribute attribute; //attributo coinvolto nell'item 
+private Object value; //valore assegnato all'attributo
 
 public Item(Attribute attribute, Object value){
 	this.attribute=attribute;

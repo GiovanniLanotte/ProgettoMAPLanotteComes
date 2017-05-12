@@ -1,4 +1,5 @@
-
+/*Definiamo la classe LinkList che modella una struttura dati lista linkatada 
+ * usando come contenitore per i pattern frequenti*/
 
 public class LinkList {
 	
