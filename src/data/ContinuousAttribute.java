@@ -1,3 +1,4 @@
+package data;
 /* Definiamo la classe ContinuousAttribute  che estende la classe Attribute e modella un attributo continuo (numerico),
  * rappresentandone il dominio [min,max] */
 

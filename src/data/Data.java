@@ -1,3 +1,4 @@
+package data;
 
 // TO DO : DECIDERE LE VISIBILITà DI ATTRIBUTI, METODI, CLASSI
 /*Definiamo la classe Data per modellare un insieme di transizioni

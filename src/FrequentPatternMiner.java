@@ -1,3 +1,6 @@
+import data.Attribute;
+import data.Data;
+import data.DiscreteAttribute;
 
 public class FrequentPatternMiner {
 

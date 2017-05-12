@@ -1,3 +1,5 @@
+import data.Attribute;
+
 /*Definiamo la classe astratta Item che modella un generico item (coppia attributo-valore, per esempio Outlook=”Sunny”) 
 */
 public abstract class Item {

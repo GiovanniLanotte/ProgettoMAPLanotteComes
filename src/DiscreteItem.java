@@ -1,3 +1,4 @@
+import data.DiscreteAttribute;
 
 public class DiscreteItem extends Item {
 

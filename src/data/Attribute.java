@@ -1,3 +1,4 @@
+package data;
 /*Definiamo la classe astratta Attribute che modella un generico attributo discreto o continuo.*/
 public class Attribute {
 private String name;  //nome simbolico dell'attributo

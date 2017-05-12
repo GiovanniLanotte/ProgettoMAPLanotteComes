@@ -1,3 +1,4 @@
+package data;
 import java.util.Iterator;
 /*Definiamo la classe DiscreteAttribute che estende la classe 
  * Attribute e modella un attributo discreto rappresentando 

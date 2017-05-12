@@ -1,4 +1,6 @@
- public class AssociationRuleMiner {
+import data.Data;
+
+public class AssociationRuleMiner {
 		
 	
 	public static LinkList confidentAssociationRuleDiscovery(Data data,FrequentPattern fp,float minConf)	{
