@@ -9,3 +9,6 @@ public EmptySetException() {
 	super("insieme di training vuoto");
 }
 }
+
+
+
