@@ -10,10 +10,6 @@ import utility.Puntatore;
 import data.Data;
 import data.EmptySetException;
 
-
-
-
-
 public class MainTest1 {
 
 	/**
