@@ -7,7 +7,7 @@ import utility.*;
 public class FrequentPatternMiner {
 
 	public static LinkList frequentPatternDiscovery(Data data, float minSup) throws EmptySetException{
-		Queue fpQueue = new Queue();
+		Queue<FrequentPattern> fpQueue = new Queue<FrequentPattern>();
 		LinkList outputFP = new LinkList();
 		for (int i = 0; i < data.getNumberOfAttributes(); i++) {
 			Attribute currentAttribute = data.getAttribute(i);
@@ -37,7 +37,7 @@ public class FrequentPatternMiner {
 		return outputFP;
 	}
 
-	private static LinkList expandFrequentPatterns(Data data, float minSup, Queue fpQueue, LinkList outputFP) throws EmptySetException,EmptyQueueException{
+	private static LinkList expandFrequentPatterns(Data data, float minSup, Queue<FrequentPattern> fpQueue, LinkList outputFP) throws EmptySetException,EmptyQueueException{
 		// TO DO
 		//in outputFP ci sono i pattern di lunghezza 1 frequenti
 		//1) crearsi un array in cui copia i riferimenti agli item 
@@ -45,7 +45,7 @@ public class FrequentPatternMiner {
 		for (Puntatore p = outputFP.firstList(); !outputFP.endList(p); p = outputFP.succ(p), t++);
 		Item itemPerRaffinamento[]=new Item[t];
 		t=0;
-		Queue tempQueue=(Queue) fpQueue.clone();
+		Queue<FrequentPattern> tempQueue=(Queue<FrequentPattern>) fpQueue.clone();
 		while (!tempQueue.isEmpty()) {
 			FrequentPattern fp=(FrequentPattern) tempQueue.first();
 			tempQueue.dequeue();
