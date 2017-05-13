@@ -1,17 +1,17 @@
 package utility;
 /*Definiamo la classe Queue che modella una struttura coda che è poi  usata come contenitore a modalità FIFO per i 
  * pattern frequenti scoperti a livello k da usare per generare i pattern candidati a livello k+1*/
-public class Queue implements Cloneable {
+public class Queue <T> implements Cloneable {
 
-	private Record begin = null;
+	private Record<T> begin = null;
 
-	private Record end = null;
+	private Record<T> end = null;
 	
-	private class Record {
+	private class Record<R> {
 
  		public Object elem;
 
- 		public Record next;
+ 		public Record<R> next;
 
 		public Record(Object e) {
 			this.elem = e; 
@@ -26,9 +26,9 @@ public class Queue implements Cloneable {
 
 	public void enqueue(Object e) {
 		if (this.isEmpty())
-			this.begin = this.end = new Record(e);
+			this.begin = this.end = new Record<T>(e);
 		else {
-			this.end.next = new Record(e);
+			this.end.next = new Record<T>(e);
 			this.end = this.end.next;
 		}
 	}
