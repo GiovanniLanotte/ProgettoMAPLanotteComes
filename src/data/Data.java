@@ -1,5 +1,8 @@
 package data;
 
+import java.util.LinkedList;
+import java.util.List;
+
 // TO DO : DECIDERE LE VISIBILITà DI ATTRIBUTI, METODI, CLASSI
 /*Definiamo la classe Data per modellare un insieme di transizioni
  * (vettori attributo-valore)*/
@@ -7,14 +10,18 @@ public class Data {
 	
 	private Object data [][]; // una matrice di Object che ha numero di righe pari al numero di transazioni da memorizzare e numero di colonne pari al numero di attributi in ciascuna transazione
 	private int numberOfExamples;//cardinalità dell’insieme di transazioni
-	private Attribute attributeSet[];// un array di attributi, che sono avvalorati in ciascuna transazione
+	private List<Attribute> attributeSet;// un array di attributi, che sono avvalorati in ciascuna transazione
 	
 	/*La classe Data popola la matrice data[][] con le transizioni (14 transazioni per 5 attributi)
 	 * Inoltre avvalora l'array attributeSet[] con cinque oggetti di DiscreteAttribute
 	 * uno per ciascun attributo*/
 	
+	
+	
 	public Data(){
-
+		
+		attributeSet=new LinkedList<Attribute>();  
+		 
 		// numberOfExamples
 		
 		 numberOfExamples=14;		 
@@ -22,7 +29,7 @@ public class Data {
 		
 		//explanatory Set
 		
-		attributeSet = new Attribute[5];
+		attributeSet = new LinkedList<Attribute>();
 
 		// TO DO : avvalorare ciascune elemento di attributeSet con un oggetto della classe DiscreteAttribute che modella il corrispondente attributo (e.g. outlook, temperature,etc)
 		// nel seguito si fornisce l'esempio per outlook
@@ -31,30 +38,30 @@ public class Data {
 		outLookValues[0]="overcast";
 		outLookValues[1]="rain";
 		outLookValues[2]="sunny";
-		attributeSet[0] = new DiscreteAttribute("Outlook",0, outLookValues);
+		attributeSet.add(new DiscreteAttribute("Outlook",0, outLookValues));
 		
 		//Avvaloriamo gli attributi di Temperature
 		String temperatureValue[] = new String[3];
 		temperatureValue[0]="hot";
 		temperatureValue[1]="mild";
 		temperatureValue[2]="cool";
-		attributeSet[1]= new DiscreteAttribute("temperature", 1, temperatureValue);
+		attributeSet.add(new DiscreteAttribute("temperature", 1, temperatureValue));
 		
 		//Avvaloro gli attibuti di humidity
 		String humidityValue[] = new String[2];
 		humidityValue[0]= "high";
 		humidityValue[1]= "normal";
-		attributeSet[2]= new DiscreteAttribute("humidity", 2, humidityValue);
+		attributeSet.add(new DiscreteAttribute("humidity", 2, humidityValue));
 		//Avvaloro gli attributi di wind
 		String windValue[] = new String[2];
 		windValue[0]= "weak";
 		windValue[1]= "strong";
-		attributeSet[3]= new DiscreteAttribute("wind", 3, windValue);
+		attributeSet.add(new DiscreteAttribute("wind", 3, windValue));
 		//Avvaloro gli attributi di playTennis
 		String playTennisValue[]= new String[2];
 		playTennisValue[0]= "no";
 		playTennisValue[1]= "yes";
-		attributeSet[4]= new DiscreteAttribute("playTennis", 4, playTennisValue);
+		attributeSet.add(new DiscreteAttribute("playTennis", 4, playTennisValue));
 
 		//data
 		
@@ -155,7 +162,7 @@ public class Data {
 	
 	public int getNumberOfAttributes(){ //metodo che restituisce la cardinalità del membro  attributeSet 
 		 
-		 return attributeSet.length;  //cardinalità dell'nsieme degli attributi
+		 return attributeSet.size();  //cardinalità dell'nsieme degli attributi
 	}
 	
 	public Object getAttributeValue(int exampleIndex, int attributeIndex){
@@ -165,7 +172,7 @@ public class Data {
 	}
 	
 	public Attribute getAttribute(int index){  //metodo che restituisce l’attributo in posizione attributeIndex di attributeSet 
-		return attributeSet[index];  //attributo con indice attributeIndex
+		return attributeSet.get(index);  //attributo con indice attributeIndex
 	}
 	
 	/*il metodo to String per ogni transazione memorizzata in data, concatena i valori assunti dagli attributi nella transazione 
