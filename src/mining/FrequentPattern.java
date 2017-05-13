@@ -1,32 +1,34 @@
 package mining;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 public class FrequentPattern implements Cloneable{
 
-	private Item fp[];
+	private List<Item> fp;
 	private float support;
 	
 	FrequentPattern(){ 
-			fp=new Item[0];
+			fp=new LinkedList<Item>();
 	}
 	
 	//aggiunge un nuovo item al pattern
 	public void addItem(Item item)
 	{
-		int length =fp.length;
+		fp.add(item);
+		/*int length =fp.length;
 		
 		Item temp []=new Item[length+1];
 		System.arraycopy(fp, 0, temp, 0, length);
 		temp [length]=item;
-		fp=temp;
+		fp=temp;*/
 		
 		
 	}
 	
 	public Item getItem(int index){
-		return fp[index];
+		return fp.get(index);
 	}
 	
 	public float getSupport(){
@@ -34,7 +36,7 @@ public class FrequentPattern implements Cloneable{
 	}
 	
 	public int getPatternLength(){
-		return fp.length;
+		return fp.size();
 	}
 	
 	public void setSupport(float support){
@@ -43,10 +45,11 @@ public class FrequentPattern implements Cloneable{
 	
 	public String toString(){
 		String value="";
-		for(int i=0;i<fp.length-1;i++)
-			value+=fp[i] +" AND ";
-		if(fp.length>0){
-			value+=fp[fp.length-1];
+		
+		for(int i=0;i<fp.size()-1;i++)
+			value+=fp.get(i) +" AND ";
+		if(fp.size()>0){
+			value+=fp.get(fp.size()-1);
 			value+="["+support+"]";
 		}
 		
@@ -58,9 +61,17 @@ public class FrequentPattern implements Cloneable{
 		Object o=null;
 		try {
 			o=super.clone();
+			((FrequentPattern) o).listClone(fp);
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
 		}
 	return o;
 	}
-}
+	
+	private void listClone(List<Item> list){
+		fp= new LinkedList<Item>();
+		for(Item i:list){
+			fp.add(i);
+		}
+	}
+	}
