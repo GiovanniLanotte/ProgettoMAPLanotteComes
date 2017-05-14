@@ -1,5 +1,6 @@
 package mining;
 
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.NavigableSet;
@@ -35,7 +36,9 @@ public class AssociationRuleArchive {
 		}
 	}
 	
-	public TreeSet<AssociationRule> getRules(FrequentPattern fp){
+	public TreeSet<AssociationRule> getRules(FrequentPattern fp) throws NoPatternExcemption{
+		if(fp.getPatternLength()==1)
+			throw new NoPatternExcemption(fp);
 		return archive.get(fp);
 	}
 	public String toString(){
@@ -43,8 +46,13 @@ public class AssociationRuleArchive {
 		Set<FrequentPattern> keys=archive.keySet();
 		int i=1;
 		for(FrequentPattern fp: keys){
-			Set<AssociationRule>value=archive.get(fp);
-			stringa+= new Integer(i).toString()+"." + archive.get(fp)+value.toString()+"\n";
+			
+			try{
+				stringa+= new Integer(i).toString()+"."+fp+"\n"+ getRules(fp)+"\n";
+			}catch (NoPatternExcemption e) {
+				System.out.println(e);
+			}
+			i++;
 		}
 		return stringa;
 		
