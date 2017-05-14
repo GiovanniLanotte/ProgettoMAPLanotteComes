@@ -1,12 +1,15 @@
 package mining;
+import java.util.LinkedList;
+
 import data.Data;
 import utility.LinkList;
 public class AssociationRuleMiner {
 	
 	
-	public static LinkList confidentAssociationRuleDiscovery(Data data,FrequentPattern fp,float minConf)throws OneLevelPatternException	{
+	public static LinkedList<AssociationRule> confidentAssociationRuleDiscovery(Data data,FrequentPattern fp,float minConf)throws OneLevelPatternException{
 //		TO DO
-		LinkList outputAR=new LinkList();
+		
+		LinkedList<AssociationRule> outputAR=new LinkedList<AssociationRule>();
 		if(fp.getPatternLength()==1)
 			throw new OneLevelPatternException(fp.toString());
 		for(int i=1;i<fp.getPatternLength();i++){
