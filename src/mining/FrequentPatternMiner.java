@@ -1,4 +1,6 @@
 package mining;
+import java.util.LinkedList;
+
 import data.Attribute;
 import data.Data;
 import data.DiscreteAttribute;
@@ -6,9 +8,9 @@ import data.EmptySetException;
 import utility.*;
 public class FrequentPatternMiner {
 
-	public static LinkList frequentPatternDiscovery(Data data, float minSup) throws EmptySetException{
+	public static LinkedList<FrequentPattern> frequentPatternDiscovery(Data data, float minSup) throws EmptySetException{
 		Queue<FrequentPattern> fpQueue = new Queue<FrequentPattern>();
-		LinkList outputFP = new LinkList();
+		LinkedList<FrequentPattern> outputFP = new LinkedList<FrequentPattern>();
 		for (int i = 0; i < data.getNumberOfAttributes(); i++) {
 			Attribute currentAttribute = data.getAttribute(i);
 			for (int j = 0; j < ((DiscreteAttribute) currentAttribute).getNumberOfDistinctValues(); j++) {
@@ -26,6 +28,7 @@ public class FrequentPatternMiner {
 			}
 
 		}
+		
 		try{
 		outputFP = expandFrequentPatterns(data, minSup, fpQueue, outputFP);
 		}catch (EmptyQueueException e) {
@@ -37,13 +40,13 @@ public class FrequentPatternMiner {
 		return outputFP;
 	}
 
-	private static LinkList expandFrequentPatterns(Data data, float minSup, Queue<FrequentPattern> fpQueue, LinkList outputFP) throws EmptySetException,EmptyQueueException{
+	private static LinkedList<FrequentPattern> expandFrequentPatterns(Data data, float minSup, Queue<FrequentPattern> fpQueue, LinkedList<FrequentPattern> outputFP) throws EmptyQueueException{
 		// TO DO
 		//in outputFP ci sono i pattern di lunghezza 1 frequenti
 		//1) crearsi un array in cui copia i riferimenti agli item 
 		int t=0;
-		for (Puntatore p = outputFP.firstList(); !outputFP.endList(p); p = outputFP.succ(p), t++);
-		Item itemPerRaffinamento[]=new Item[t];
+		//for (Puntatore p = outputFP.firstList(); !outputFP.endList(p); p = outputFP.succ(p), t++);
+		Item itemPerRaffinamento[]=new Item[outputFP.size()];
 		t=0;
 		Queue<FrequentPattern> tempQueue=(Queue<FrequentPattern>) fpQueue.clone();
 		while (!tempQueue.isEmpty()) {
