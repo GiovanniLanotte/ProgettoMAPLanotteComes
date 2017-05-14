@@ -1,51 +1,74 @@
-import data.Data;
-import data.EmptySetException;
-import utility.LinkList;
+import java.util.Iterator;
+import java.util.LinkedList;
+
+import keyboardinput.Keyboard;
 import mining.AssociationRule;
+import mining.AssociationRuleArchive;
 import mining.AssociationRuleMiner;
 import mining.FrequentPattern;
 import mining.FrequentPatternMiner;
+import mining.NoPatternExcemption;
 import mining.OneLevelPatternException;
-import utility.Puntatore;
+
+import data.Data;
+import data.EmptySetException;
+
+
+
+
+
 public class MainTest {
 
 	/**
 	 * @param args
 	 */
-	
-		public static void main(String[] args) {
+	public static void main(String[] args) {
 		Data data= new Data();
+		AssociationRuleArchive archive=new AssociationRuleArchive();
+		float minSup=(float)0.0,minConf=(float)0.0;
+		do{
+			System.out.println("Inserisci minsup (in [0,1])");
+			minSup=Keyboard.readFloat();
+		}while (minSup<0 || minSup>1);
 		
-		LinkList outputFP;
-		try {
-			outputFP = FrequentPatternMiner.frequentPatternDiscovery(data,(float)0.2);
+		do{
+			System.out.println("Inserisci minconf (in [0,1])");
+			minConf=Keyboard.readFloat();
+		}while (minConf<0 || minConf>1);
 		
 		
-		int i=1;
-		Puntatore p=outputFP.firstList();
-		while(!outputFP.endList(p)){
-			FrequentPattern FP=(FrequentPattern)outputFP.readList(p);
-			System.out.println(i+":"+FP);
-			LinkList outputAR=AssociationRuleMiner.confidentAssociationRuleDiscovery(data,FP,(float)0.3);
-			Puntatore q=outputAR.firstList();
-			int j=1;
-			while(!outputAR.endList(q)){
-				AssociationRule AR=(AssociationRule)outputAR.readList(q);
-				System.out.println("--"+i+"."+j+":"+AR);
-				j++;
-				q=outputAR.succ(q);
+		
+		try{
+			LinkedList<FrequentPattern> outputFP=FrequentPatternMiner.frequentPatternDiscovery(data,minSup);
+			
+			
+			Iterator<FrequentPattern> it=outputFP.iterator();
+			while(it.hasNext()){
+				FrequentPattern FP=it.next();
+				archive.put(FP);
+								
+				LinkedList<AssociationRule> outputAR=null;
+				try {
+					outputAR = AssociationRuleMiner.confidentAssociationRuleDiscovery(data,FP,minConf); 
+					Iterator<AssociationRule> itRule=outputAR.iterator();
+					while(itRule.hasNext()){
+						archive.put(FP,itRule.next());
+					}
+									
+				
+				} catch (OneLevelPatternException e) {
+					// TODO Auto-generated catch block
+					System.out.println(e.getMessage());
+					
+				} 
+				
 			}
-			p=outputFP.succ(p);
-			i++;
 		}
+		catch(EmptySetException e){
+			System.out.println(e.getMessage());
+		}
+		System.out.print(archive);
 		
-		} catch (EmptySetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (OneLevelPatternException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 	}
 
