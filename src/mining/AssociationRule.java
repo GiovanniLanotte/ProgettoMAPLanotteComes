@@ -1,5 +1,5 @@
 package mining;
-public class AssociationRule {
+public class AssociationRule implements Comparable<AssociationRule>{
 private Item antecedent[]=new Item[0];
 private Item consequent[]=new Item[0];
 private float support;
@@ -65,6 +65,16 @@ public String toString(){
 	stringa+=getConsequentItem(i);
 	stringa+=" ("+getSupport()+","+getConfidence()+")";
 	return stringa;
+}
+
+@Override
+public int compareTo(AssociationRule arg0) {
+	if(this.confidence==arg0.confidence)
+		return 0;
+	if(this.confidence<arg0.confidence)
+		return -1;
+	else
+		return 1;
 }
 }
 	
