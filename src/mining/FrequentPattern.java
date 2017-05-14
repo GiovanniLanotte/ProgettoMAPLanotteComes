@@ -14,17 +14,8 @@ public class FrequentPattern implements Cloneable{
 	}
 	
 	//aggiunge un nuovo item al pattern
-	public void addItem(Item item)
-	{
+	public void addItem(Item item){
 		fp.add(item);
-		/*int length =fp.length;
-		
-		Item temp []=new Item[length+1];
-		System.arraycopy(fp, 0, temp, 0, length);
-		temp [length]=item;
-		fp=temp;*/
-		
-		
 	}
 	
 	public Item getItem(int index){
