@@ -1,7 +1,9 @@
 package mining;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import data.Attribute;
+import data.ContinuousAttribute;
 import data.Data;
 import data.DiscreteAttribute;
 import data.EmptySetException;
@@ -11,8 +13,13 @@ public class FrequentPatternMiner {
 	public static LinkedList<FrequentPattern> frequentPatternDiscovery(Data data, float minSup) throws EmptySetException{
 		Queue<FrequentPattern> fpQueue = new Queue<FrequentPattern>();
 		LinkedList<FrequentPattern> outputFP = new LinkedList<FrequentPattern>();
+		
 		for (int i = 0; i < data.getNumberOfAttributes(); i++) {
 			Attribute currentAttribute = data.getAttribute(i);
+			if(currentAttribute instanceof DiscreteAttribute){
+				//currentattribute genera item discreti
+			
+			
 			for (int j = 0; j < ((DiscreteAttribute) currentAttribute).getNumberOfDistinctValues(); j++) {
 				DiscreteItem item = new DiscreteItem((DiscreteAttribute) currentAttribute,
 						((DiscreteAttribute) currentAttribute).getValue(j));
@@ -26,6 +33,37 @@ public class FrequentPatternMiner {
 				}
 
 			}
+			}
+			else{
+				//continuous attribute
+				//currenAttribute genera item continui
+				ContinuousAttribute continuousAttribute=(ContinuousAttribute)currentAttribute;
+				Iterator<Float>it=continuousAttribute.iterator();  
+				if(it.hasNext()) {  
+					float inf=it.next();   
+					while(it.hasNext()){    
+						float sup=it.next();    
+						ContinuousItem item;    
+						continuousAttribute=(ContinuousAttribute)currentAttribute;
+						if(it.hasNext())  
+							item=new ContinuousItem(continuousAttribute,new Interval(inf, sup));    
+						else      
+							item=new ContinuousItem(continuousAttribute, new Interval(inf, sup+0.01f*(sup-inf)));    
+							inf=sup;    
+							FrequentPattern fp=new FrequentPattern();
+							fp.addItem(item);           
+							fp.setSupport(FrequentPatternMiner.computeSupport(data,fp));    
+							if(fp.getSupport()>=minSup){ // 1-FP CANDIDATE      
+								fpQueue.enqueue(fp);      
+								outputFP.add(fp);    
+								}   
+							}  
+					} 
+				} 
+							
+					
+				
+			
 
 		}
 		
@@ -71,13 +109,18 @@ public class FrequentPatternMiner {
 			for(int i=0;i<itemPerRaffinamento.length;i++){
 				boolean elemItemUguali=false;
 				for(int k=0;k<fp.getPatternLength();k++){
-						String NameItem=fp.getItem(k).getAttribute().getName();
-						String ValueItem=(String)fp.getItem(k).getValue();
-						String NameitemPerRaffinamento=itemPerRaffinamento[i].getAttribute().getName();
-						String ValueitemPerRaffinamento=(String)itemPerRaffinamento[i].getValue();
-						if(itemPerRaffinamento[i].getAttribute().getName().equals((String)fp.getItem(k).getAttribute().getName())&&
-						itemPerRaffinamento[i].getValue().equals((String)fp.getItem(k).getValue())){
-							elemItemUguali=true;
+						if(itemPerRaffinamento[i] instanceof DiscreteItem && fp.getItem(k) instanceof DiscreteItem){
+						
+							if(itemPerRaffinamento[i].getAttribute().getName().equals((String)fp.getItem(k).getAttribute().getName())&&
+								((DiscreteItem)itemPerRaffinamento[i]).checkItemCondition(((DiscreteItem)fp.getItem(k).getValue()))){
+								elemItemUguali=true;
+							}
+						}
+						if(itemPerRaffinamento[i] instanceof ContinuousItem && fp.getItem(k) instanceof ContinuousItem){
+							if(itemPerRaffinamento[i].getAttribute().getName().equals((String)fp.getItem(k).getAttribute().getName())&&
+								((ContinuousItem)itemPerRaffinamento[i]).checkItemCondition(((ContinuousItem)fp.getItem(k)).getValue())){
+								elemItemUguali=true;
+							}
 						}
 				}
 				if(!elemItemUguali){
@@ -91,6 +134,7 @@ public class FrequentPatternMiner {
 				}
 			}
 		}
+		outputFP=expandFrequentPatterns(data,minSup,fpQueue,outputFP); 
 		return outputFP;
 	}
 
@@ -102,16 +146,27 @@ public class FrequentPatternMiner {
 			// indice item
 			boolean isSupporting = true;
 			for (int j = 0; j < FP.getPatternLength(); j++) {
-				// DiscreteItem
-				DiscreteItem item = (DiscreteItem) FP.getItem(j);
-				DiscreteAttribute attribute = (DiscreteAttribute) item.getAttribute();
-				// Extract the example value
-				Object valueInExample = data.getAttributeValue(i, attribute.getIndex());
-				if (!item.checkItemCondition(valueInExample)) {
-					isSupporting = false;
-					break; // the ith example does not satisfy fp
+				if(FP.getItem(j) instanceof DiscreteItem ) {
+					// DiscreteItem
+					DiscreteItem item = (DiscreteItem) FP.getItem(j);
+					DiscreteAttribute attribute = (DiscreteAttribute) item.getAttribute();
+					// Extract the example value
+					Object valueInExample = data.getAttributeValue(i, attribute.getIndex());
+					if (!item.checkItemCondition(valueInExample)) {
+						isSupporting = false;
+						break; // the ith example does not satisfy fp
+					}
 				}
-
+				else{
+					ContinuousItem item = (ContinuousItem) FP.getItem(j);
+					ContinuousAttribute attribute= (ContinuousAttribute) item.getAttribute();
+					Object valueInExample = data.getAttributeValue(i, attribute.getIndex());
+					if (!item.checkItemCondition(valueInExample)) {
+						isSupporting = false;
+						break; // the ith example does not satisfy fp
+					}
+				}
+				
 			}
 			if (isSupporting)
 				suppCount++;
