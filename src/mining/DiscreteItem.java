@@ -9,7 +9,8 @@ public class DiscreteItem extends Item {
 	
 	@Override
 	public boolean checkItemCondition(Object value) {
-		return value==getValue();
+		
+		return ((String)value).equals(((String)this.getValue()));
 	}
 	
 	
