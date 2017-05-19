@@ -1,8 +1,8 @@
 package mining;
+
 import java.util.LinkedList;
 
 import data.Data;
-import utility.LinkList;
 public class AssociationRuleMiner {
 	
 	

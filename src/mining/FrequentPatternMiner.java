@@ -127,28 +127,4 @@ public class FrequentPatternMiner {
 		return temp;
 	}
 
-	// aggiunta
-	private static boolean controlloEsistenza(LinkList list, FrequentPattern fp) {
-		for (Puntatore p = list.firstList(); !list.endList(p); p = list.succ(p)) {
-			FrequentPattern controlloFp = (FrequentPattern) p.link.elemento;
-			if (controlloFp.getPatternLength() == fp.getPatternLength()) {
-				int controllo = 0;
-				for (int i = 0; i < controlloFp.getPatternLength(); i++) {
-					for (int j = 0; j < fp.getPatternLength(); j++) {
-						if (controlloFp.getItem(i).getAttribute() == fp.getItem(j).getAttribute()
-								&& ((String) controlloFp.getItem(i).getValue()) == ((String) fp.getItem(j)
-										.getValue())) {
-							controllo++;
-						}
-					}
-
-				}
-				if (controllo == fp.getPatternLength()) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
 }
