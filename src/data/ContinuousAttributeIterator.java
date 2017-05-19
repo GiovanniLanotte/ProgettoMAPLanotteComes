@@ -23,12 +23,7 @@ public class ContinuousAttributeIterator implements Iterator<Float> {
 	}	
 	@Override
 	public boolean hasNext() {
-		if (j<=numValues){
-			return true;
-		} 
-		else{
-		return false;
-		}
+		return j<=numValues;
 	}
 
 	@Override
