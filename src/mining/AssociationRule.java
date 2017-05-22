@@ -1,5 +1,8 @@
 package mining;
-public class AssociationRule implements Comparable<AssociationRule>{
+
+import java.io.Serializable;
+
+public class AssociationRule implements Comparable<AssociationRule>, Serializable{
 private Item antecedent[]=new Item[0];
 private Item consequent[]=new Item[0];
 private float support;

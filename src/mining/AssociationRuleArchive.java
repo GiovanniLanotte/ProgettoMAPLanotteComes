@@ -1,12 +1,20 @@
 package mining;
 
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class AssociationRuleArchive {
+public class AssociationRuleArchive implements Serializable {
 
+	
 	private HashMap<FrequentPattern, TreeSet<AssociationRule>> archive;
 	
 	public AssociationRuleArchive() {
@@ -30,7 +38,7 @@ public class AssociationRuleArchive {
 		else{
 			TreeSet<AssociationRule> value= archive.get(fp);
 			value.add(rule);
-			archive.put(fp,value);
+			archive.put(fp, value);
 		}
 	}
 	
@@ -55,5 +63,13 @@ public class AssociationRuleArchive {
 		return stringa;
 		
 	}
-
+	
+	public void salva(String nomeFile) throws FileNotFoundException, IOException {
+		ObjectOutputStream out= new ObjectOutputStream(new FileOutputStream(nomeFile));
+		out.writeObject(this);
+	}
+	public static AssociationRuleArchive carica(String nomeFile) throws FileNotFoundException, IOException,ClassNotFoundException{
+		ObjectInputStream in= new ObjectInputStream(new FileInputStream(nomeFile));
+		return (AssociationRuleArchive) in.readObject();
+	}
 }

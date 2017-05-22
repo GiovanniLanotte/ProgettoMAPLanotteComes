@@ -1,10 +1,11 @@
 package mining;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class FrequentPattern implements Cloneable{
+public class FrequentPattern implements Cloneable,Serializable{
 
 	private List<Item> fp;
 	private float support;
