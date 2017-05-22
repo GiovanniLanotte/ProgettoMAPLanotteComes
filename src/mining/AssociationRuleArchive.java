@@ -2,8 +2,6 @@ package mining;
 
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.NavigableSet;
 import java.util.Set;
 import java.util.TreeSet;
 
