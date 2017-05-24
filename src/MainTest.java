@@ -1,5 +1,7 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.List;
 
 import keyboardinput.Keyboard;
 import mining.AssociationRule;
@@ -7,7 +9,6 @@ import mining.AssociationRuleArchive;
 import mining.AssociationRuleMiner;
 import mining.FrequentPattern;
 import mining.FrequentPatternMiner;
-import mining.NoPatternExcemption;
 import mining.OneLevelPatternException;
 
 import data.Data;
@@ -23,49 +24,85 @@ public class MainTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Data data= new Data();
-		AssociationRuleArchive archive=new AssociationRuleArchive();
-		float minSup=(float)0.0,minConf=(float)0.0;
-		do{
-			System.out.println("Inserisci minsup (in [0,1])");
-			minSup=Keyboard.readFloat();
-		}while (minSup<0 || minSup>1);
 		
-		do{
-			System.out.println("Inserisci minconf (in [0,1])");
-			minConf=Keyboard.readFloat();
-		}while (minConf<0 || minConf>1);
+		AssociationRuleArchive archive=null;
+		System.out.println("Carica archivio/Crea archivio? (s/n)");
+		char r = Keyboard.readChar();
 		
+		if(r=='n'){
 		
-		
-		try{
-			LinkedList<FrequentPattern> outputFP=FrequentPatternMiner.frequentPatternDiscovery(data,minSup);
+			Data data= new Data();
+			archive=new AssociationRuleArchive();
+			float minSup=(float)0.0,minConf=(float)0.0;
+			do{
+				System.out.println("Inserisci minsup (in [0,1])");
+				minSup=Keyboard.readFloat();
+			}while (minSup<0 || minSup>1);
+			
+			do{
+				System.out.println("Inserisci minconf (in [0,1])");
+				minConf=Keyboard.readFloat();
+			}while (minConf<0 || minConf>1);
 			
 			
-			Iterator<FrequentPattern> it=outputFP.iterator();
-			while(it.hasNext()){
-				FrequentPattern FP=it.next();
-				archive.put(FP);
-								
-				LinkedList<AssociationRule> outputAR=null;
-				try {
-					outputAR = AssociationRuleMiner.confidentAssociationRuleDiscovery(data,FP,minConf); 
-					Iterator<AssociationRule> itRule=outputAR.iterator();
-					while(itRule.hasNext()){
-						archive.put(FP,itRule.next());
-					}
+			
+			try{
+				List<FrequentPattern> outputFP=FrequentPatternMiner.frequentPatternDiscovery(data,minSup);
+				
+				
+				
+				
+				Iterator<FrequentPattern> it=outputFP.iterator();
+				while(it.hasNext()){
+					FrequentPattern FP=it.next();
+					archive.put(FP);
 									
-				
-				} catch (OneLevelPatternException e) {
-					// TODO Auto-generated catch block
-					System.out.println(e.getMessage());
+					List<AssociationRule> outputAR=null;
+					try {
+						outputAR = AssociationRuleMiner.confidentAssociationRuleDiscovery(data,FP,minConf);
+						Iterator<AssociationRule> itRule=outputAR.iterator();
+						while(itRule.hasNext()){
+							archive.put(FP,itRule.next());
+						}
+										
 					
-				} 
-				
+					} catch (OneLevelPatternException e) {
+						// TODO Auto-generated catch block
+						System.out.println(e.getMessage());
+					}
+					
+				}
+				System.out.println("Nome file per backup:");
+				String nomeFile=Keyboard.readString();
+				try {
+					archive.salva(nomeFile);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			catch(EmptySetException e){
+				System.out.println(e.getMessage());
 			}
 		}
-		catch(EmptySetException e){
-			System.out.println(e.getMessage());
+		else{
+			System.out.println("Nome file di restore:");
+			String nomeFile=Keyboard.readString();
+			try {
+				archive=AssociationRuleArchive.carica(nomeFile);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		System.out.print(archive);
 		
