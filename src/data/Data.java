@@ -20,6 +20,8 @@ public class Data {
 	
 	public Data(){
 		
+		//TableData(per recuperare le tuple (cioè i dati)) e TableSchema (per recuperare le informazioni della tabella)
+		
 		attributeSet=new LinkedList<Attribute>();  
 		 
 		// numberOfExamples
