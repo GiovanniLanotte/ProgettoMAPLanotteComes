@@ -1,6 +1,8 @@
 package mining;
 
-public class Interval {
+import java.io.Serializable;
+
+public class Interval implements Serializable{
 private float inf; //estremo inferiore
 private float sup; //estremo superiore
 
@@ -23,7 +25,7 @@ public float getSup() {
 	return sup;
 }
 public boolean checkValueInclusion(float value){
-	return inf>=value && value<sup;
+	return inf<=value && value<sup;
 }
 
 @Override
