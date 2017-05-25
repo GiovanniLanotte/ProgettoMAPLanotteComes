@@ -103,21 +103,23 @@ public class FrequentPatternMiner {
 		// pattern newfp che colleziona tutti gli atem di fp + l'item che ha selazionato dall'array; si calcola supporto di newfp e se è maggiore di min sup aggiunge
 		// newfp alla lista e alla coda
 		
-		
 		while(!fpQueue.isEmpty()){
 			FrequentPattern fp=(FrequentPattern) fpQueue.first();
 			fpQueue.dequeue();
 			for(int i=0;i<itemPerRaffinamento.length;i++){
 				boolean elemItemUguali=false;
 				for(int k=0;k<fp.getPatternLength();k++){
-						
-						String NameItem=fp.getItem(k).getAttribute().getName();
-						String ValueItem=(String)fp.getItem(k).getValue();
-						String NameitemPerRaffinamento=itemPerRaffinamento[i].getAttribute().getName();
-						String ValueitemPerRaffinamento=(String)itemPerRaffinamento[i].getValue();
-						if(itemPerRaffinamento[i].getAttribute().getName().equals((String)fp.getItem(k).getAttribute().getName())&&
-						itemPerRaffinamento[i].checkItemCondition(fp.getItem(k))){
-							elemItemUguali=true;
+						if(itemPerRaffinamento[i] instanceof DiscreteItem && (fp.getItem(k)) instanceof DiscreteItem){
+							if(itemPerRaffinamento[i].getAttribute().getName().equals((String)fp.getItem(k).getAttribute().getName())){
+								elemItemUguali=true;
+								break;
+							}
+						}
+						if((itemPerRaffinamento[i] instanceof ContinuousItem) && (fp.getItem(k) instanceof ContinuousItem)){
+							if(itemPerRaffinamento[i].getAttribute().getName().equals((String)fp.getItem(k).getAttribute().getName())){
+								elemItemUguali=true;
+								break;
+							}
 						}
 				}
 				if(!elemItemUguali){
@@ -143,8 +145,8 @@ public class FrequentPatternMiner {
 			boolean isSupporting = true;
 			for (int j = 0; j < FP.getPatternLength(); j++) {
 				// DiscreteItem
-				DiscreteItem item = (DiscreteItem) FP.getItem(j);
-				DiscreteAttribute attribute = (DiscreteAttribute) item.getAttribute();
+				Item item = (Item) FP.getItem(j);
+				Attribute attribute = (Attribute) item.getAttribute();
 				// Extract the example value
 				Object valueInExample = data.getAttributeValue(i, attribute.getIndex());
 				if (!item.checkItemCondition(valueInExample)) {
