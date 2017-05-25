@@ -13,7 +13,7 @@ public class ContinuousItem extends Item {
 	
 	@Override
 	public String toString() {
-		return ((Interval)getValue()).toString();
+		return getAttribute()+"="+((Interval)getValue()).toString();
 	}
 
 }
