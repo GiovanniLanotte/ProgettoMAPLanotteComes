@@ -64,7 +64,6 @@ public class TableSchema {
 	      }
 	      res.close();
 	
-	
 	    
 	    }
 	  
