@@ -108,7 +108,7 @@ public class TableData {
 		List<Object> risVet= new LinkedList<Object>();
 		Connection conn= db.getConnection();
 		Statement st= conn.createStatement();
-		ResultSet ris=st.executeQuery("Select distict "+ column+ "From " + table + "order by " + column + "ASC" );
+		ResultSet ris=st.executeQuery("select distinct "+ column.getColumnName()+ " from " + table + " order by " + column.getColumnName() + " ASC;" );
 		while(ris.next()){
 			risVet.add(ris.getObject(column.getColumnName()));
 		}
